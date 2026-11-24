@@ -1,0 +1,48 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+# riverpod_lint 3.1.9 ist über `analysis_server_plugin` eingebunden, nicht
+# über `custom_lint` (siehe pubspec.yaml, Begründung bei `riverpod_lint`, und
+# task-13-brief.md Schritt 5). Es gibt kein gesondertes
+# `dart run custom_lint`-Kommando mehr für diese Fassung.
+#
+# **Der richtige Aufruf ist `dart analyze`, nicht `flutter analyze`.**
+# Belegt in Task 13 über drei Läufe: eine absichtlich verstoßende Probedatei
+# (`ref` in `State.dispose`) wurde von `dart analyze` zuverlässig gemeldet
+# (`avoid_ref_inside_state_dispose`), von `flutter analyze` in keinem der
+# drei Läufe. `flutter analyze` lädt den `analysis_server_plugin`-Mechanismus
+# hier offenbar nicht. Siehe task-13-report.md für den vollständigen
+# Nachweis (Verstoßdatei angelegt, gemeldet, wieder entfernt).
+plugins:
+  riverpod_lint: 3.1.9
+
+analyzer:
+  exclude:
+    - build/**
+    - ios/**
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at https://dart.dev/lints.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options

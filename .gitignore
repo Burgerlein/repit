@@ -1,0 +1,37 @@
+# Wird als .gitignore ins öffentliche Repo gelegt.
+
+# Gesundheitsdaten, Exporte, Backups, Schlüssel
+*.healthexport
+export.xml
+Export.xml
+export_cda.xml
+*.gpx
+*.tcx
+backup-*.json
+trainingsexport*.json
+*.sqlite
+*.db
+.env
+.env.*
+*.apikey
+secrets.json
+
+# RepDB-Übungsdaten: geladen mit `node scripts/exercises-asset.mjs`,
+# nicht weiterzugeben (Lizenz Punkt 3)
+/app/assets/exercises/
+
+# Flutter / Dart
+app/.dart_tool/
+app/build/
+Packages/*/.dart_tool/
+
+# Xcode / SwiftPM
+xcuserdata/
+DerivedData/
+.build/
+.swiftpm/
+build/
+*.xcuserstate
+
+# macOS
+.DS_Store

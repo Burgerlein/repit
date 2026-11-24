@@ -1,0 +1,240 @@
+name: repit
+description: "REPIT — iPhone-App für Kraft- und Ausdauertraining."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+
+  # trainings_core: alle Rechnungen, importiert nur dart:core/dart:math.
+  trainings_core:
+    path: ../Packages/trainings_core
+
+  # Bisher nur transitiv aufgelöst (über flutter_riverpod/drift/cupertino_ui).
+  # Task 9 (Baukasten) braucht es direkt: `Format` soll die Locale fest auf
+  # de_DE setzen, siehe `test/design/formatierung_test.dart`. Version wörtlich
+  # aus der bisherigen `pubspec.lock` übernommen, damit sich an der
+  # aufgelösten Fassung nichts ändert.
+  intl: 0.20.3
+
+  # Siehe docs/superpowers/plans/2026-10-23-flutter-rebuild-m0-m1.md,
+  # Tech Stack und Abschnitt 4 des Entwurfs für Begründung und Fassung.
+  flutter_riverpod: 3.4.3
+  drift: 2.35.2
+  drift_flutter: 0.3.1
+  path_provider: 2.1.6
+  cupertino_ui: 1.1.4
+  liquid_glass_widgets: 1.14.2
+  fl_chart: 1.3.0
+
+  # Open Food Facts (#284): der einzige Weg ins Netz, gekapselt in
+  # `lib/ernaehrung/off_client.dart`. Eine direkte Abhängigkeit, weil der
+  # Client einen eingesetzten `http.Client` nimmt — so laufen die Tests
+  # gegen einen `MockClient` statt gegen das Netz.
+  http: 1.6.0
+
+  # Barcode scannen (#324): die Kamera hinter der Naht `StrichcodeLeser`
+  # (`lib/ernaehrung/strichcode_leser.dart`). Auf iOS liest es über Apples
+  # Vision-Framework, ohne ML Kit und ohne Netz. Braucht nur den
+  # Freigabetext `NSCameraUsageDescription` in `ios/Runner/Info.plist` —
+  # keine Capability, kein Entitlement.
+  mobile_scanner: 7.5.0
+
+  # Foto-Schätzung (#340): die Kamera hinter der Naht `FotoKamera`
+  # (`lib/ernaehrung/ki_sucher.dart`), mit `enableAudio: false` — dann
+  # fragt `camera_avfoundation` die Mikrofonfreigabe nicht ab, und es
+  # braucht weder `NSMicrophoneUsageDescription` noch eine Capability.
+  # `image` verkleinert das Foto in reinem Dart auf 1.024 Punkte.
+  camera: 0.12.2
+  image: 4.12.0
+
+  # Dateiauswahl (#59 Teil 1): die Exportdatei der alten App wählen, hinter
+  # der Naht `ExportDateiWaehler` (`lib/uebernahme/export_datei.dart`). Auf
+  # iOS öffnet es `UIDocumentPickerViewController` mit `asCopy`; es braucht
+  # weder eine Capability noch ein Entitlement noch einen Freigabetext. Die
+  # Fassung ist exakt festgelegt wie bei den übrigen Plugins.
+  file_picker: 13.3.3
+
+  # Die Seed-Datenbank (#543): `lib/ernaehrung/seed_datenbank.dart` öffnet
+  # `assets/ernaehrung_seed.sqlite` als zweite, nur lesende Verbindung und
+  # sucht über deren fertigen FTS5-Index. Bisher nur transitiv aufgelöst
+  # (über drift); eine direkte Abhängigkeit, weil der Code `sqlite3`,
+  # `OpenMode` und `Row` selbst importiert — dasselbe Vorgehen wie bei
+  # `intl` und `crypto`. Fassung wörtlich aus der bisherigen
+  # `pubspec.lock`, damit sich an der aufgelösten nichts ändert. Die
+  # native Bibliothek kommt weiterhin von `sqlite3_flutter_libs` (über
+  # `drift_flutter`), unter `flutter test` vom System.
+  sqlite3: 3.5.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Bisher nur transitiv aufgelöst. `test/design/schriften_test.dart` nagelt
+  # die SHA-256 der gebündelten Phosphor-Schriftdateien fest (Begründung dort)
+  # und importiert dafür `package:crypto/crypto.dart` direkt. Version wörtlich
+  # aus der bisherigen `pubspec.lock` übernommen, damit sich an der
+  # aufgelösten Fassung nichts ändert — dasselbe Vorgehen wie bei `intl` in
+  # Commit 037eaed.
+  crypto: 3.0.7
+
+  # Bisher nur transitiv über `flutter_test` aufgelöst.
+  # `test/tag/laufender_tag_test.dart` prüft den Zeitgeber des laufenden
+  # Tages (#455) mit `fakeAsync` und importiert dafür
+  # `package:fake_async/fake_async.dart` direkt; `flutter_test` exportiert
+  # es nicht. Version wörtlich aus der bisherigen `pubspec.lock`, wie bei
+  # `crypto`.
+  fake_async: 1.3.3
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^6.0.0
+
+  # Codegenerierung (Dart-Makros sind eingestellt) und Lint-Durchsetzung.
+  # Siehe docs/superpowers/plans/2026-10-23-flutter-rebuild-m0-m1.md,
+  # Task 2 (Fixrunde), Task 6 und Task 13 für Begründung und Fassung.
+  #
+  # Drei Fassungen weichen von der Vorgabe ab, Einzelheiten in
+  # task-2-report.md:
+  # - riverpod_annotation 4.0.9 wurde nie veröffentlicht (letzte Fassung
+  #   4.0.7); riverpod_generator 4.0.9 verlangt in seinem eigenen pubspec
+  #   exakt riverpod_annotation 4.0.7 — keine andere Kombination löst auf.
+  # - drift_dev kennt kein 2.35.2; 2.35.1 ist die letzte Fassung und
+  #   akzeptiert drift >=2.30.0 <2.36.0, also auch drift 2.35.2.
+  # - build_runner 2.17.1 verlangt build >=5.0.0, drift_dev und
+  #   riverpod_generator aber beide build <5.0.0 — 2.16.2 ist die
+  #   höchste Fassung, die mit beiden zusammen auflöst.
+  #
+  # custom_lint (0.8.1) fehlt bewusst: riverpod_lint 3.1.9 trägt
+  # analyzer_plugin ^0.14.0, jede existierende custom_lint-Fassung ab
+  # 0.7.4 verlangt ^0.13.0 — unvereinbar, unabhängig von drift_dev.
+  # riverpod_lint 3.1.9 führt custom_lint auch nicht mehr als eigene
+  # Abhängigkeit (Umstieg auf analysis_server_plugin) — der Baustein
+  # scheint für diese Fassung bereits abgelöst. Siehe task-2-report.md.
+  riverpod_annotation: 4.0.7
+  riverpod_generator: 4.0.9
+  riverpod_lint: 3.1.9
+  drift_dev: 2.35.1
+  build_runner: 2.16.2
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # Lizenzdateien liegen bewusst neben den Schriftdateien in assets/fonts/ —
+  # die SIL Open Font License verlangt das ausdrücklich, und auch für die
+  # MIT-lizenzierte Phosphor-Schrift ist das der ehrliche Ort, nicht nur eine
+  # Pflicht. `flutter` erlaubt kein Glob auf Nicht-Font-Dateien als Asset,
+  # deshalb stehen sie hier einzeln.
+  assets:
+    - assets/fonts/BarlowCondensed/OFL.txt
+    - assets/fonts/SourceSans3/OFL.txt
+    - assets/fonts/Phosphor/LICENSE.txt
+
+    # Bewegungsbilder und Übungsdaten von RepDB (#38). Verzeichnisse statt
+    # Einzeldateien — ein Eintrag gilt aber **nicht rekursiv**, deshalb
+    # stehen `images/` und das Wurzelverzeichnis getrennt da. Erzeugt von
+    # `scripts/exercises-asset.mjs`, nicht von Hand bearbeiten.
+    # `LICENSE-DATA.md` liegt mit im Verzeichnis und fährt damit in der App
+    # mit; Attribution und Nutzungsbedingungen stehen dort.
+    - assets/exercises/
+    - assets/exercises/images/
+
+    # Die Lebensmittel-Seed-Datenbank (#543): BLS 4.0 plus die populärsten
+    # deutschen Open-Food-Facts-Produkte, mit fertigem FTS5-Index. Gebaut
+    # von `scripts/ernaehrung-seed/seed-bauen.sh`, Lizenz- und
+    # Zitierpflichten stehen dort im README. Sie liegt entgegen
+    # `.gitignore` (`*.sqlite`) bewusst im Repository — sie ist
+    # mitgelieferter Inhalt, keine Datenbank des Nutzers, und enthält
+    # keine Gesundheitsdaten. `lib/ernaehrung/seed_datenbank.dart` kopiert
+    # sie beim Start nach `getApplicationSupportDirectory()`, weil SQLite
+    # ein Asset im Bündel nicht öffnen kann.
+    - assets/ernaehrung_seed.sqlite
+
+    # Das Änderungsblatt „Was ist neu" (#89): eine Fassungsliste mit
+    # verständlichen Einträgen, gepflegt im selben Commit wie das Feature.
+    # Wächtertest: `test/aenderungen_datei_test.dart`.
+    - assets/aenderungen.json
+
+  # Barlow Condensed (Zahlen/Überschriften) und Source Sans 3 (Fließtext),
+  # beide von Google Fonts bezogen (github.com/google/fonts, SIL Open Font
+  # License). Ersetzt den Behelf `.width(.condensed)` aus
+  # `Sources/DesignSystem/Typography.swift` durch die echte Schrift, siehe
+  # Entwurf Abschnitt 6.6. Source Sans 3 liegt bei Google Fonts nur als
+  # Variable Font vor (ein File, mehrere Gewichte über die `wght`-Achse);
+  # Flutter löst das über mehrere Einträge auf dieselbe Datei auf.
+  fonts:
+    - family: Barlow Condensed
+      fonts:
+        - asset: assets/fonts/BarlowCondensed/BarlowCondensed-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/BarlowCondensed/BarlowCondensed-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/BarlowCondensed/BarlowCondensed-Bold.ttf
+          weight: 700
+    - family: Source Sans 3
+      fonts:
+        - asset: assets/fonts/SourceSans3/SourceSans3[wght].ttf
+          weight: 400
+        - asset: assets/fonts/SourceSans3/SourceSans3[wght].ttf
+          weight: 600
+
+    # Phosphor (Entwurf Abschnitt 6.5: SF Symbols lassen sich für Android
+    # nicht lizenzieren), direkt gebündelt statt über das Paket
+    # `phosphor_flutter` bezogen — dessen Dart-API übersetzt gegen diese
+    # Flutter-Fassung nicht mehr (`IconData` ist jetzt eine `final class`,
+    # `phosphor_flutter` 2.1.0 erbt trotzdem davon). Eine nicht importierbare
+    # Abhängigkeit nur wegen ihrer Schriftdatei zu behalten wäre eine Falle:
+    # ein künftiger `pub get` könnte eine Fassung mit verschobenen
+    # Codepoints ziehen, ohne dass irgendetwas fehlschlägt — die Symbole
+    # wären still falsch. Mit der Schrift direkt im Repository ändert sie
+    # sich nur, wenn hier jemand bewusst eine neue Datei einspielt. Dateien
+    # unverändert aus `phosphor_flutter` 2.1.0 (`lib/fonts/Phosphor.ttf`,
+    # `Phosphor-Fill.ttf`) übernommen, nur zwei der sechs Stile (Regular,
+    # Fill) — mehr braucht `Symbole.tabelle` nicht. Herkunft und
+    # SHA-256-Prüfsummen stehen in `lib/design/symbole.dart`.
+    - family: PhosphorRegular
+      fonts:
+        - asset: assets/fonts/Phosphor/Phosphor-Regular.ttf
+    - family: PhosphorFill
+      fonts:
+        - asset: assets/fonts/Phosphor/Phosphor-Fill.ttf

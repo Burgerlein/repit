@@ -1,0 +1,42 @@
+[
+  {
+    "fassung": "v0.1",
+    "stand": "2026-11-23",
+    "eintraege": [
+      {
+        "titel": "Essen suchen findet, was du meinst",
+        "text": "Toast, gekochtes Ei, Paprika — rund 27.000 Lebensmittel sind mitgeliefert, die Suche geht auch ohne Internet.",
+        "ziel": "ernaehrung"
+      },
+      {
+        "titel": "Essen eintragen",
+        "text": "Mahlzeiten per Suche oder Strichcode erfassen — dazu Wasser und die Tagesbilanz.",
+        "ziel": "ernaehrung"
+      },
+      {
+        "titel": "Der Heute-Schirm",
+        "text": "Schritte, Erholung und Ernährung des Tages auf einen Blick.",
+        "ziel": "heute"
+      },
+      {
+        "titel": "Erholung und Schlaf",
+        "text": "Ampel, Schlaf-Score und Nächte im Verlauf — als Einschätzung, nicht als Diagnose."
+      },
+      {
+        "titel": "Umfänge messen",
+        "text": "Dreizehn Maße mit dem Maßband eintragen, mit Verlauf je Maß.",
+        "ziel": "umfaenge-messen"
+      },
+      {
+        "titel": "Ziele und Auszeiten",
+        "text": "Auszeiten eintragen — Wettkämpfe und Körperziel folgen.",
+        "ziel": "ziele"
+      },
+      {
+        "titel": "Daten übernehmen",
+        "text": "Gym-Trainings und Umfänge aus der alten App einlesen.",
+        "ziel": "daten-uebernehmen"
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+// Vorlage für `Signierung.xcconfig` (#612) — diese Datei kopieren,
+// Endung `.beispiel` entfernen, die eigene Team-ID eintragen.
+//
+//     cp Signierung.xcconfig.beispiel Signierung.xcconfig
+//
+// `Signierung.xcconfig` selbst steht in `.gitignore` und wird nie
+// committet. Der Grund ist nicht Geheimhaltung — eine Team-ID ist keine —,
+// sondern dass mehrere Leute an diesem Projekt bauen, möglicherweise mit
+// verschiedenen Apple-Teams. Stünde der Wert in der versionierten
+// Projektdatei, überschriebe ihn jeder Xcode-Start beim jeweils anderen.
+//
+// Die eigene Team-ID steht in Xcode unter Settings → Accounts, oder unter
+// <https://developer.apple.com/account> → Membership.
+//
+// Ohne diese Datei baut das Projekt weiterhin (`#include?` im Debug.xcconfig
+// und Release.xcconfig ist optional); es lässt sich dann nur nicht
+// signieren, und `flutter build ios --no-codesign` sowie `flutter test`
+// laufen trotzdem.
+
+DEVELOPMENT_TEAM = HIERDEINETEAMID
