@@ -8,48 +8,8 @@ kommen aus Apple Health.
 Gebaut mit Flutter (Cupertino), die Rechnungen liegen in einem reinen
 Dart-Paket.
 
-*Ein kurzes Video, das durch die App führt, kommt an diese Stelle.*
-
-> Alle Bildschirmfotos zeigen **erfundene Demo-Daten** aus dem Simulator.
-
-<table>
-  <tr>
-    <td><img src="screenshots/home.png" width="200" alt="Home"></td>
-    <td><img src="screenshots/gym.png" width="200" alt="Gym"></td>
-    <td><img src="screenshots/log.png" width="200" alt="Training eintragen"></td>
-    <td><img src="screenshots/verlauf.png" width="200" alt="Letzte Trainings"></td>
-  </tr>
-  <tr>
-    <td align="center">Home</td>
-    <td align="center">Gym</td>
-    <td align="center">Training eintragen</td>
-    <td align="center">Letzte Trainings</td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/erholung.png" width="200" alt="Erholung"></td>
-    <td><img src="screenshots/schlaf.png" width="200" alt="Schlaf"></td>
-    <td><img src="screenshots/ernaehrung.png" width="200" alt="Ernährung"></td>
-    <td><img src="screenshots/fortschritt.png" width="200" alt="Fortschritt pro Übung"></td>
-  </tr>
-  <tr>
-    <td align="center">Erholung</td>
-    <td align="center">Schlaf</td>
-    <td align="center">Ernährung</td>
-    <td align="center">Fortschritt pro Übung</td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/koerper.png" width="200" alt="Körper"></td>
-    <td><img src="screenshots/messungen.png" width="200" alt="Messungen"></td>
-    <td><img src="screenshots/schritte.png" width="200" alt="Schritte"></td>
-    <td><img src="screenshots/mehr.png" width="200" alt="Mehr"></td>
-  </tr>
-  <tr>
-    <td align="center">Körper</td>
-    <td align="center">Messungen</td>
-    <td align="center">Schritte</td>
-    <td align="center">Mehr</td>
-  </tr>
-</table>
+*Hier kommen Bildschirmfotos und ein kurzes Video, das durch die App
+führt — sobald die Oberfläche fertig ist.*
 
 ## Was die App kann
 
