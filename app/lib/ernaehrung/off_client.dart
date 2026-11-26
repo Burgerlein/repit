@@ -435,7 +435,7 @@ const _produktFelder =
 /// Open Food Facts verlangt, dass eine App sich mit einem **eigenen**
 /// `User-Agent` ausweist, und sperrt sonst auf Verdacht. Keine
 /// E-Mail-Adresse: Das Repository ist kein Ort für Kontaktdaten.
-const _kennung = 'TrainingsApp/0.1 (privates Projekt; iOS; Flutter)';
+const _kennung = 'REPIT/0.1 (privates Projekt; iOS; Flutter)';
 
 /// Der Client für den Riverpod-Baum — in Tests mit
 /// `offClientProvider.overrideWithValue(OffClient(client: MockClient(…)))`
