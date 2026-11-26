@@ -22,7 +22,7 @@ Gym tracking
 Health Auswertung 
 - schlaf
 - gewicht
-- Ruheuls und co alles wird aus gelesen
+- Ruhepuls und co alles wird aus gelesen
 
 
 Flo Erweiterung für Damen 
@@ -41,3 +41,8 @@ Ideen für die Zukunft
 ( ) Einkaufsliste 
 ( ) Reed design + themes 
 ( ) Apple Watch app 
+( ) Ein Gym was man sich einrichten kann desto mehr punkte man durch Kalorien ziel erreicht und Trainings durch gezogen bekommt desto mehr Coins man hat
+( ) Meal Plan erstellen für eine Woche 
+( ) Rezepte Rebels teilen KI werte die aus und leg Rezepte an 
+
+
